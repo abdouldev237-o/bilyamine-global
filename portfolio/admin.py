@@ -8,7 +8,7 @@ from .models import SiteSettings, Category, Service, Project, GalleryImage, Test
 
 
 # Custom admin site
-admin.site.site_header = "Portfolio — Abdoulwahab Oumar"
+admin.site.site_header = "Portfolio — Bilyamine"
 admin.site.site_title = "Administration Portfolio"
 admin.site.index_title = "Tableau de bord"
 

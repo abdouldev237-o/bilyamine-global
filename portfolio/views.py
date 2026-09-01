@@ -57,7 +57,7 @@ def home(request):
         'featured_testimonials': featured_testimonials,
         'testimonials': testimonials,
         'stats': stats,
-        'meta_title': settings.seo_title if settings else "Abdoulwahab Oumar — Ingénieur Civil & Bâtiment",
+        'meta_title': settings.seo_title if settings else "Bilyamine — Ingénieur Civil & Bâtiment",
         'meta_description': settings.seo_description if settings else "",
     }
     return render(request, 'portfolio/home.html', context)
@@ -68,7 +68,7 @@ def about(request):
     settings = SiteSettings.load()
 
     context = {
-        'meta_title': f"À propos — {settings.professional_name if settings else 'Abdoulwahab Oumar'}",
+        'meta_title': f"À propos — {settings.professional_name if settings else 'Bilyamine'}",
         'meta_description': settings.short_presentation if settings else "",
     }
     return render(request, 'portfolio/about.html', context)
@@ -81,7 +81,7 @@ def services(request):
 
     context = {
         'services': services_list,
-        'meta_title': f"Nos Services — {settings.professional_name if settings else 'Abdoulwahab Oumar'}",
+        'meta_title': f"Nos Services — {settings.professional_name if settings else 'Bilyamine'}",
         'meta_description': "Découvrez nos services de conception, construction, rénovation et aménagement.",
     }
     return render(request, 'portfolio/services.html', context)
@@ -112,7 +112,7 @@ def projects(request):
         'categories': categories,
         'projects': page_obj,
         'active_category': active_category,
-        'meta_title': f"Nos Réalisations — {settings.professional_name if settings else 'Abdoulwahab Oumar'}",
+        'meta_title': f"Nos Réalisations — {settings.professional_name if settings else 'Bilyamine'}",
         'meta_description': "Découvrez nos projets de construction, conception, rénovation et aménagement à Douala et au Cameroun.",
     }
     return render(request, 'portfolio/projects.html', context)
@@ -172,7 +172,7 @@ def testimonials(request):
     context = {
         'testimonials': testimonials_list,
         'form': form,
-        'meta_title': f"Témoignages — {settings.professional_name if settings else 'Abdoulwahab Oumar'}",
+        'meta_title': f"Témoignages — {settings.professional_name if settings else 'Bilyamine'}",
         'meta_description': "Découvrez les témoignages de nos clients et partagez votre expérience.",
     }
     return render(request, 'portfolio/testimonials.html', context)
@@ -191,7 +191,7 @@ def contact(request):
 
     context = {
         'whatsapp_link': whatsapp_link,
-        'meta_title': f"Contact — {settings.professional_name if settings else 'Abdoulwahab Oumar'}",
-        'meta_description': "Contactez Abdoulwahab Oumar pour vos projets de construction, conception et rénovation à Douala, Cameroun.",
+        'meta_title': f"Contact — {settings.professional_name if settings else 'Bilyamine'}",
+        'meta_description': "Contactez Bilyamine pour vos projets de construction, conception et rénovation à Douala, Cameroun.",
     }
     return render(request, 'portfolio/contact.html', context)

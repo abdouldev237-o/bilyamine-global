@@ -15,7 +15,7 @@ class Command(BaseCommand):
         # SiteSettings
         if not SiteSettings.objects.exists():
             SiteSettings.objects.create(
-                professional_name="Abdoulwahab Oumar",
+                professional_name="Bilyamine",
                 slogan="Excellence et rigueur dans chaque projet",
                 short_presentation="Ingénieur civil passionné, je conçois et réalise des projets de construction alliant technique, esthétique et durabilité.",
                 full_description="Avec une approche rigoureuse et créative, j'accompagne mes clients de la conception à la réalisation de leurs projets de construction. Basé à Douala, j'interviens sur l'ensemble du territoire camerounais.",
@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 country="Cameroun",
                 hero_text="Des solutions pensées pour vos projets.",
                 hero_subtext="Conception, construction, rénovation et aménagement — de l'idée à la livraison.",
-                seo_title="Abdoulwahab Oumar — Ingénieur Civil & Bâtiment | Douala, Cameroun",
+                seo_title="Bilyamine — Ingénieur Civil & Bâtiment | Douala, Cameroun",
                 seo_description="Services de génie civil, construction, rénovation et conception architecturale à Douala et au Cameroun.",
                 copyright_year=2026,
             )

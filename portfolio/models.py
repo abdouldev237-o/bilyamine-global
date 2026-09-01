@@ -1,5 +1,5 @@
 """
-Modèles du portfolio professionnel d'Abdoulwahab Oumar.
+Modèles du portfolio professionnel d'Bilyamine.
 """
 
 from django.db import models
@@ -34,7 +34,7 @@ class SiteSettings(SingletonModel):
     professional_name = models.CharField(
         "Nom du professionnel",
         max_length=200,
-        default="Abdoulwahab Oumar"
+        default="Bilyamine"
     )
     slogan = models.CharField("Slogan", max_length=300, blank=True)
     short_presentation = models.TextField("Courte présentation", blank=True)
@@ -60,7 +60,7 @@ class SiteSettings(SingletonModel):
     hero_subtext = models.CharField("Sous-texte hero", max_length=500, blank=True)
 
     # SEO
-    seo_title = models.CharField("Titre SEO", max_length=200, default="Abdoulwahab Oumar — Ingénieur Civil & Bâtiment | Douala, Cameroun")
+    seo_title = models.CharField("Titre SEO", max_length=200, default="Bilyamine — Ingénieur Civil & Bâtiment | Douala, Cameroun")
     seo_description = models.TextField("Description SEO", blank=True)
     og_image = models.ImageField("Image Open Graph", upload_to='site/', blank=True)
 

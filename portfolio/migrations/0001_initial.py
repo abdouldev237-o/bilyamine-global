@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
             name='SiteSettings',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('professional_name', models.CharField(default='Abdoulwahab Oumar', max_length=200, verbose_name='Nom du professionnel')),
+                ('professional_name', models.CharField(default='Bilyamine', max_length=200, verbose_name='Nom du professionnel')),
                 ('slogan', models.CharField(blank=True, max_length=300, verbose_name='Slogan')),
                 ('short_presentation', models.TextField(blank=True, verbose_name='Courte présentation')),
                 ('full_description', models.TextField(blank=True, verbose_name='Description complète')),
@@ -75,7 +75,7 @@ class Migration(migrations.Migration):
                 ('hero_image', models.ImageField(blank=True, upload_to='site/', verbose_name='Image hero')),
                 ('hero_text', models.CharField(default='Des solutions pensées pour vos projets.', max_length=300, verbose_name='Texte hero')),
                 ('hero_subtext', models.CharField(blank=True, max_length=500, verbose_name='Sous-texte hero')),
-                ('seo_title', models.CharField(default='Abdoulwahab Oumar — Ingénieur Civil & Bâtiment | Douala, Cameroun', max_length=200, verbose_name='Titre SEO')),
+                ('seo_title', models.CharField(default='Bilyamine — Ingénieur Civil & Bâtiment | Douala, Cameroun', max_length=200, verbose_name='Titre SEO')),
                 ('seo_description', models.TextField(blank=True, verbose_name='Description SEO')),
                 ('og_image', models.ImageField(blank=True, upload_to='site/', verbose_name='Image Open Graph')),
                 ('facebook_url', models.URLField(blank=True, verbose_name='Facebook')),
