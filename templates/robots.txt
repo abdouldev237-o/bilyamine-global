@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bilyamine-global.vercel.app/sitemap.xml
