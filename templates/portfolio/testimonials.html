@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <p class="text-accent font-semibold uppercase tracking-wider text-sm mb-3">Avis clients</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-primary mb-6">Témoignages</h1>
+            <p class="text-gray-600">Découvrez ce que nos clients disent de nos services.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {% for testimonial in testimonials %}
+            <div class="bg-surface rounded-xl p-8 h-full flex flex-col">
+                <div class="flex gap-1 mb-4">
+                    {% for i in "12345"|make_list %}
+                    <svg class="w-5 h-5 {% if forloop.counter <= testimonial.rating %}text-accent{% else %}text-gray-300{% endif %}" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    {% endfor %}
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6 flex-1">"{{ testimonial.message }}"</p>
+                <div class="flex items-center gap-4 pt-4 border-t border-gray-200">
+                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        {{ testimonial.name|first }}
+                    </div>
+                    <div>
+                        <p class="font-semibold text-primary">{{ testimonial.name }}</p>
+                        <p class="text-sm text-gray-500">{{ testimonial.profession }}{% if testimonial.company %}, {{ testimonial.company }}{% endif %}</p>
+                    </div>
+                </div>
+                {% if testimonial.project %}
+                <p class="text-xs text-gray-400 mt-3">Projet : {{ testimonial.project.title }}</p>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-400">Aucun témoignage approuvé pour le moment. Soyez le premier à partager votre expérience !</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="max-w-2xl mx-auto bg-surface rounded-2xl p-8 lg:p-12">
+            <h2 class="text-2xl font-bold text-primary mb-2 text-center">Laisser un témoignage</h2>
+            <p class="text-gray-600 text-center mb-8">Votre avis compte. Partagez votre expérience avec nous.</p>
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">{{ form.name.label }}</label>
+                        {{ form.name }}
+                        {% if form.name.errors %}<p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.rating.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">{{ form.rating.label }} (1 à 5)</label>
+                        {{ form.rating }}
+                        {% if form.rating.errors %}<p class="text-red-500 text-sm mt-1">{{ form.rating.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.profession.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">{{ form.profession.label }}</label>
+                        {{ form.profession }}
+                    </div>
+                    <div>
+                        <label for="{{ form.company.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">{{ form.company.label }}</label>
+                        {{ form.company }}
+                    </div>
+                </div>
+                <div>
+                    <label for="{{ form.project.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">{{ form.project.label }}</label>
+                    {{ form.project }}
+                </div>
+                <div>
+                    <label for="{{ form.message.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">{{ form.message.label }}</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}<p class="text-red-500 text-sm mt-1">{{ form.message.errors.0 }}</p>{% endif %}
+                </div>
+                <button type="submit" class="w-full px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:bg-amber-600 transition-colors shadow-lg">
+                    Envoyer mon témoignage
+                </button>
+                <p class="text-xs text-gray-500 text-center">Votre témoignage sera vérifié avant publication. Merci de votre patience.</p>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

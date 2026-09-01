@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}{{ meta_title|default:"Abdoulwahab Oumar — Ingénieur Civil & Bâtiment" }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Services de génie civil, construction, rénovation et conception architecturale à Douala et au Cameroun." }}{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% block og_title %}{{ meta_title|default:"Abdoulwahab Oumar" }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ meta_description|default:"" }}{% endblock %}">
+    {% if site_settings and site_settings.og_image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.og_image.url }}">
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ meta_title|default:"Abdoulwahab Oumar" }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ meta_description|default:"" }}{% endblock %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+    <meta name="theme-color" content="#0B0F14">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0F14',
+                        accent: '#F59E0B',
+                        muted: '#64748B',
+                        surface: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block extra_head %}{% endblock %}
+
+    <!-- JSON-LD Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "{{ site_settings.professional_name|default:'Abdoulwahab Oumar' }}",
+        "description": "{{ site_settings.short_presentation|default:'Ingénieur civil et professionnel du bâtiment à Douala, Cameroun.'|escapejs }}",
+        "url": "{{ request.scheme }}://{{ request.get_host }}",
+        "telephone": "{{ site_settings.phone_primary|default:'+237 693 149 222' }}",
+        "email": "{{ site_settings.email|default:'' }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{ site_settings.city|default:'Douala' }}",
+            "addressCountry": "{{ site_settings.country|default:'Cameroun' }}"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Douala"
+        },
+        "priceRange": "$$",
+        "sameAs": [
+            {% if site_settings.facebook_url %}"{{ site_settings.facebook_url }}",{% endif %}
+            {% if site_settings.instagram_url %}"{{ site_settings.instagram_url }}",{% endif %}
+            {% if site_settings.linkedin_url %}"{{ site_settings.linkedin_url }}",{% endif %}
+            {% if site_settings.twitter_url %}"{{ site_settings.twitter_url }}"{% endif %}
+        ]
+    }
+    </script>
+</head>
+<body class="font-sans text-gray-800 bg-white antialiased" x-data="{ mobileMenuOpen: false, scrollTop: false }" @scroll.window="scrollTop = window.pageYOffset > 500">
+
+    {% include 'partials/navbar.html' %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'partials/footer.html' %}
+
+    <!-- Bouton retour en haut -->
+    <button 
+        x-show="scrollTop" 
+        x-transition 
+        @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="fixed bottom-6 right-6 z-50 bg-accent text-white w-12 h-12 rounded-full shadow-lg hover:bg-amber-600 transition-colors flex items-center justify-center"
+        aria-label="Retour en haut"
+    >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Messages Django -->
+    {% include 'partials/messages.html' %}
+
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

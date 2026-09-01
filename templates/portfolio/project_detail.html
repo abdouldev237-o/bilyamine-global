@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="py-20 lg:py-28 bg-white" x-data="lightbox()">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                {% if project.category %}
+                <a href="{% url 'portfolio:projects' %}?categorie={{ project.category.slug }}" class="px-4 py-1.5 bg-accent/10 text-accent text-sm font-semibold rounded-full hover:bg-accent hover:text-white transition-colors">
+                    {{ project.category.name }}
+                </a>
+                {% endif %}
+                {% if project.is_featured %}
+                <span class="px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full">À la une</span>
+                {% endif %}
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">{{ project.title }}</h1>
+            <div class="flex flex-wrap items-center gap-6 text-gray-500">
+                {% if project.location %}
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    {{ project.location }}
+                </span>
+                {% endif %}
+                {% if project.year %}
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    {{ project.year }}
+                </span>
+                {% endif %}
+                {% if project.duration %}
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    {{ project.duration }}
+                </span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-12">
+            {% if project.main_image %}
+            <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="w-full rounded-2xl shadow-lg object-cover max-h-[600px]">
+            {% endif %}
+        </div>
+        <div class="grid lg:grid-cols-3 gap-12 mb-16">
+            <div class="lg:col-span-2">
+                <h2 class="text-2xl font-bold text-primary mb-6">À propos du projet</h2>
+                <div class="prose prose-lg max-w-none text-gray-600 leading-relaxed">
+                    {{ project.description|linebreaks }}
+                </div>
+            </div>
+            <div class="bg-surface rounded-xl p-8 h-fit">
+                <h3 class="font-bold text-primary mb-6">Détails</h3>
+                <dl class="space-y-4">
+                    {% if project.client_name %}
+                    <div>
+                        <dt class="text-sm text-gray-400 mb-1">Client</dt>
+                        <dd class="font-medium text-primary">{{ project.client_name }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if project.location %}
+                    <div>
+                        <dt class="text-sm text-gray-400 mb-1">Localisation</dt>
+                        <dd class="font-medium text-primary">{{ project.location }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if project.year %}
+                    <div>
+                        <dt class="text-sm text-gray-400 mb-1">Année</dt>
+                        <dd class="font-medium text-primary">{{ project.year }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if project.duration %}
+                    <div>
+                        <dt class="text-sm text-gray-400 mb-1">Durée</dt>
+                        <dd class="font-medium text-primary">{{ project.duration }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if project.category %}
+                    <div>
+                        <dt class="text-sm text-gray-400 mb-1">Catégorie</dt>
+                        <dd class="font-medium text-primary">{{ project.category.name }}</dd>
+                    </div>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+        {% if gallery %}
+        <div class="mb-16">
+            <h2 class="text-2xl font-bold text-primary mb-8">Galerie photos</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {% for image in gallery %}
+                <button @click="open({{ forloop.counter0 }})" class="relative aspect-square rounded-xl overflow-hidden group bg-gray-100 focus:outline-none focus:ring-2 focus:ring-accent">
+                    <img src="{{ image.image.url }}" alt="{{ image.alt_text|default:image.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    {% if image.title %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white text-sm font-medium">{{ image.title }}</span>
+                    </div>
+                    {% endif %}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+        <div x-show="active !== null" x-transition.opacity class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" x-cloak @keydown.escape.window="close()">
+            <button @click="close()" class="absolute top-4 right-4 text-white/70 hover:text-white p-2" aria-label="Fermer">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <button @click="prev()" class="absolute left-4 text-white/70 hover:text-white p-2" aria-label="Précédent">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button @click="next()" class="absolute right-4 text-white/70 hover:text-white p-2" aria-label="Suivant">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <div class="max-w-5xl max-h-[85vh] px-16">
+                <template x-for="(img, idx) in images" :key="idx">
+                    <img x-show="active === idx" :src="img.src" :alt="img.alt" class="max-w-full max-h-[85vh] object-contain mx-auto" x-transition.opacity>
+                </template>
+                <p x-show="images[active] && images[active].caption" x-text="images[active].caption" class="text-center text-white/80 mt-4 text-sm"></p>
+            </div>
+        </div>
+        {% endif %}
+        {% if testimonials %}
+        <div class="mb-16">
+            <h2 class="text-2xl font-bold text-primary mb-8">Témoignages sur ce projet</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                {% for t in testimonials %}
+                <div class="bg-surface rounded-xl p-6">
+                    <div class="flex gap-1 mb-3">
+                        {% for i in "12345"|make_list %}
+                        <svg class="w-4 h-4 {% if forloop.counter <= t.rating %}text-accent{% else %}text-gray-300{% endif %}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        {% endfor %}
+                    </div>
+                    <p class="text-gray-700 mb-4">"{{ t.message }}"</p>
+                    <p class="font-semibold text-primary text-sm">{{ t.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% if similar_projects %}
+        <div>
+            <h2 class="text-2xl font-bold text-primary mb-8">Projets similaires</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for p in similar_projects %}
+                {% include 'portfolio/_project_card.html' with project=p %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<script>
+function lightbox() {
+    return {
+        active: null,
+        images: [
+            {% for image in gallery %}
+            { src: '{{ image.image.url }}', alt: '{{ image.alt_text|default:image.title|escapejs }}', caption: '{{ image.caption|escapejs }}' },
+            {% endfor %}
+        ],
+        open(index) { this.active = index; document.body.style.overflow = 'hidden'; },
+        close() { this.active = null; document.body.style.overflow = ''; },
+        next() { this.active = (this.active + 1) % this.images.length; },
+        prev() { this.active = (this.active - 1 + this.images.length) % this.images.length; },
+    }
+}
+</script>
+{% endblock %}
