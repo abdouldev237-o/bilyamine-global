@@ -12,12 +12,13 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-change-me-in-production-7x!9a2b3c4d5e6f7g8h9i0j')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'h788f84d-3dk-fxw3_XS%#!8cv67x!9a2b3c4d5e6f7g8h9i0j')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'False'
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1').split()
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ["https://bilyamine-global.vercel.app/,https://*.vercel.app/"]
 
 # Application definition
 INSTALLED_APPS = [
