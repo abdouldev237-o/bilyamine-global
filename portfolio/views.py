@@ -122,7 +122,7 @@ def projects(request):
         'projects': page_obj,
         'active_category': active_category,
         'meta_title': f"Nos Réalisations — {settings.professional_name if settings else 'Bilyamine'}",
-        'meta_description': "Découvrez nos projets de construction, conception, rénovation et aménagement à Douala et au Cameroun.",
+        'meta_description': "Découvrez nos projets de construction, conception, rénovation et aménagement àu Grand Nord  et au Cameroun.",
     }
     return render(request, 'portfolio/projects.html', context)
 
@@ -201,6 +201,6 @@ def contact(request):
     context = {
         'whatsapp_link': whatsapp_link,
         'meta_title': f"Contact — {settings.professional_name if settings else 'Bilyamine'}",
-        'meta_description': "Contactez Bilyamine pour vos projets de construction, conception et rénovation à Douala, Cameroun.",
+        'meta_description': "Contactez Bilyamine pour vos projets de construction, conception et rénovation àu Grand Nord , Cameroun.",
     }
     return render(request, 'portfolio/contact.html', context)

@@ -47,7 +47,7 @@ class SiteSettings(SingletonModel):
     whatsapp_number = models.CharField("Numéro WhatsApp", max_length=50, default="+237 693 149 222")
     email = models.EmailField("Email", blank=True)
     address = models.CharField("Adresse", max_length=300, blank=True)
-    city = models.CharField("Ville", max_length=100, default="Douala")
+    city = models.CharField("Ville", max_length=100, default="Grand Nord ")
     country = models.CharField("Pays", max_length=100, default="Cameroun")
 
     # Images
@@ -60,7 +60,7 @@ class SiteSettings(SingletonModel):
     hero_subtext = models.CharField("Sous-texte hero", max_length=500, blank=True)
 
     # SEO
-    seo_title = models.CharField("Titre SEO", max_length=200, default="Bilyamine — Ingénieur Civil & Bâtiment | Douala, Cameroun")
+    seo_title = models.CharField("Titre SEO", max_length=200, default="Bilyamine — Ingénieur Civil & Bâtiment | Grand Nord , Cameroun")
     seo_description = models.TextField("Description SEO", blank=True)
     og_image = models.ImageField("Image Open Graph", upload_to='site/', blank=True)
 

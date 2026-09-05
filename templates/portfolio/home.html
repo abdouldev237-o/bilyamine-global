@@ -15,7 +15,7 @@
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="max-w-3xl">
-            <p class="text-accent font-medium mb-4 tracking-wide uppercase text-sm">{{ site_settings.city|default:"Douala" }} • {{ site_settings.country|default:"Cameroun" }}</p>
+            <p class="text-accent font-medium mb-4 tracking-wide uppercase text-sm">{{ site_settings.city|default:"Grand Nord " }} • {{ site_settings.country|default:"Cameroun" }}</p>
             <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
                 {{ hero_text|default:"Des solutions pensées pour vos projets." }}
             </h1>
@@ -53,7 +53,7 @@
                     {{ site_settings.short_presentation|default:"Ingénieur civil passionné, je conçois et réalise des projets de construction alliant technique, esthétique et durabilité." }}
                 </p>
                 <p class="text-gray-500 leading-relaxed mb-8">
-                    {{ site_settings.full_description|default:"Basé à Douala, j'interviens sur l'ensemble du territoire camerounais pour accompagner mes clients de la conception à la réalisation de leurs projets de construction." }}
+                    {{ site_settings.full_description|default:"Basé àu Grand Nord , j'interviens sur l'ensemble du territoire camerounais pour accompagner mes clients de la conception à la réalisation de leurs projets de construction." }}
                 </p>
                 <a href="{% url 'portfolio:about' %}" class="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors">
                     En savoir plus

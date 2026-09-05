@@ -1,6 +1,6 @@
 # Portfolio — Bilyamine
 
-Site web professionnel complet pour un ingénieur civil / professionnel du bâtiment basé à Douala, Cameroun.
+Site web professionnel complet pour un ingénieur civil / professionnel du bâtiment basé à Grand Nord , Cameroun.
 
 ## Stack technique
 

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>{% block title %}{{ meta_title|default:"Bilyamine — Ingénieur Civil & Bâtiment" }}{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Services de génie civil, construction, rénovation et conception architecturale à Douala et au Cameroun." }}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Services de génie civil, construction, rénovation et conception architecturale à Grand Nord et au Cameroun." }}{% endblock %}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
@@ -67,18 +67,18 @@
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "{{ site_settings.professional_name|default:'Bilyamine' }}",
-        "description": "{{ site_settings.short_presentation|default:'Ingénieur civil et professionnel du bâtiment à Douala, Cameroun.'|escapejs }}",
+        "description": "{{ site_settings.short_presentation|default:'Ingénieur civil et professionnel du bâtiment à Grand Nord , Cameroun.'|escapejs }}",
         "url": "{{ request.scheme }}://{{ request.get_host }}",
         "telephone": "{{ site_settings.phone_primary|default:'+237 693 149 222' }}",
         "email": "{{ site_settings.email|default:'' }}",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "{{ site_settings.city|default:'Douala' }}",
+            "addressLocality": "{{ site_settings.city|default:'Grand Nord ' }}",
             "addressCountry": "{{ site_settings.country|default:'Cameroun' }}"
         },
         "areaServed": {
             "@type": "City",
-            "name": "Douala"
+            "name": "Grand Nord "
         },
         "priceRange": "$$",
         "sameAs": [
