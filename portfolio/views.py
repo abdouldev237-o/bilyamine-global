@@ -9,6 +9,15 @@ from django.core.paginator import Paginator
 from .models import SiteSettings, Category, Service, Project, GalleryImage, Testimonial
 from .forms import TestimonialForm
 
+from django.contrib.auth import get_user_model
+
+def create_admin(request):
+    User = get_user_model()
+    if not User.objects.filter(username='bilyamine').exists():
+        User.objects.create_superuser('bilyamine', 'admin@bilyamineglobal.com', 'Bilyamine@2025!')
+        return HttpResponse("Superuser created")
+    return HttpResponse("Already exists")
+
 
 def home(request):
     """Page d'accueil."""
