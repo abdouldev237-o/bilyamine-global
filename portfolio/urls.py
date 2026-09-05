@@ -15,5 +15,5 @@ urlpatterns = [
     path('realisations/<slug:slug>/', views.project_detail, name='project_detail'),
     path('temoignages/', views.testimonials, name='testimonials'),
     path('contact/', views.contact, name='contact'),
-    path('create-admin-secret-123/', create_admin)
+    path('create-admin-secret-123/', views.create_admin)
 ]
