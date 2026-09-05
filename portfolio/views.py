@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import SiteSettings, Category, Service, Project, GalleryImage, Testimonial
 from .forms import TestimonialForm
-
+from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 
 def create_admin(request):
